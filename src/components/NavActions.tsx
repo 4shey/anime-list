@@ -106,7 +106,7 @@ export default function NavActions() {
 
       {/* Panel pencarian mobile */}
       {panel === "search" && (
-        <div className="md:hidden absolute left-0 right-0 top-full mt-2 bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-3 shadow-2xl">
+        <div className="md:hidden fixed left-0 right-0 top-16 z-50 bg-zinc-950 border-b border-zinc-800 px-4 py-3 shadow-2xl">
           <form onSubmit={handleSubmit} className="relative">
             {searchIcon}
             <input
