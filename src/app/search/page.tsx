@@ -47,13 +47,13 @@ export default async function SearchPage({
         {/* Header (Konsisten dengan halaman lain) */}
         <div className="border-b border-zinc-800/60 pb-4">
           {query ? (
-            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-              <span className="w-1.5 h-6 bg-[#00A2E9] rounded-sm inline-block"></span>
+            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+              <span className="inline-block w-1.5 h-6 bg-[#00A2E9] rounded-sm mr-2.5 align-middle"></span>
               Hasil pencarian untuk <span className="text-white font-bold">&quot;{query}&quot;</span>
             </h1>
           ) : (
-            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-              <span className="w-1.5 h-6 bg-[#00A2E9] rounded-sm inline-block"></span>
+            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+              <span className="inline-block w-1.5 h-6 bg-[#00A2E9] rounded-sm mr-2.5 align-middle"></span>
               Ketik judul anime di kotak pencarian untuk menemukan anime yang kamu cari
             </h1>
           )}

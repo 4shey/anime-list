@@ -52,8 +52,8 @@ export default async function GenreDetail({
               <span>/</span>
               <span className="text-zinc-400">{genreName}</span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-              <span className="w-1.5 h-6 bg-[#00A2E9] rounded-sm inline-block"></span>
+            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+              <span className="inline-block w-1.5 h-6 bg-[#00A2E9] rounded-sm mr-2.5 align-middle"></span>
               Anime Genre {genreName}
             </h1>
             {total > 0 && (

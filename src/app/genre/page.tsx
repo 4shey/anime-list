@@ -45,8 +45,8 @@ export default async function GenreList() {
       <div className="space-y-8">
         {/* Header */}
         <div className="border-b border-zinc-800/60 pb-4">
-          <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-            <span className="w-1.5 h-6 bg-[#00A2E9] rounded-sm inline-block"></span>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+            <span className="inline-block w-1.5 h-6 bg-[#00A2E9] rounded-sm mr-2.5 align-middle"></span>
             Daftar Genre
           </h1>
           <p className="text-zinc-400 text-xs mt-2 ml-4">
