@@ -4,7 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import NextTopLoader from "nextjs-toploader";
 import NavActions from "@/components/NavActions";
-import Image from "next/image";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -96,7 +96,9 @@ export default function RootLayout({
 
               {/* Search Box */}
               <div className="flex-1 flex justify-end ml-10">
-                <NavActions />
+                <Suspense fallback={null}>
+                  <NavActions />
+                </Suspense>
               </div>
             </div>
           </div>
