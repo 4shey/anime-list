@@ -34,7 +34,7 @@ const MANIFEST = {
     components: {
       vercel: 'Next.js 14 App Router (Node.js runtime). Handles scraping, /tmp file caching, and AniList enrichment on the detail endpoint.',
       worker: 'Single-file Cloudflare Worker (cf-worker/index.js). Contains no scraping logic — only 3 proxies: /proxy/html/*, /proxy/api/*, /proxy/stream/*, and a /health check. Private; requires X-API-Key.',
-      workerUrl: 'https://otakuproxy.azizkalimorgo.workers.dev'
+      workerUrl: process.env.SCRAPER_WORKER_URL || '(configured via SCRAPER_WORKER_URL env)'
     }
   },
 

@@ -1,5 +1,4 @@
 const SOKUJA_BASE = 'https://x6.sokuja.uk';
-const VALID_API_KEY = 'e1d31716fcc84a54bb39da93c0bb4db911a9126459af4dd3922895e888f5ec78';
 
 const BROWSER_HEADERS = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
@@ -31,9 +30,9 @@ function error(message, status = 400) {
   return json({ ok: false, creator: 'Z-SCRAPE', statusCode: status, message }, { status });
 }
 
-function authCheck(req) {
+function authCheck(req, env) {
   const key = req.headers.get('X-API-Key') || req.headers.get('x-api-key');
-  return key === VALID_API_KEY;
+  return key && key === env.PROXY_API_KEY;
 }
 
 function checkRateLimit(ip) {
@@ -55,8 +54,8 @@ function checkRateLimit(ip) {
   return data.count <= limit;
 }
 
-async function handleProxyHtml(req, targetUrl) {
-  if (!authCheck(req)) return error('Unauthorized', 401);
+async function handleProxyHtml(req, targetUrl, env) {
+  if (!authCheck(req, env)) return error('Unauthorized', 401);
 
   try {
     const headers = {
@@ -82,8 +81,8 @@ async function handleProxyHtml(req, targetUrl) {
   }
 }
 
-async function handleProxyStream(req, targetUrl) {
-  if (!authCheck(req)) return error('Unauthorized', 401);
+async function handleProxyStream(req, targetUrl, env) {
+  if (!authCheck(req, env)) return error('Unauthorized', 401);
 
   try {
     const range = req.headers.get('Range');
@@ -116,8 +115,8 @@ async function handleProxyStream(req, targetUrl) {
   }
 }
 
-async function handleProxyApi(req, targetUrl) {
-  if (!authCheck(req)) return error('Unauthorized', 401);
+async function handleProxyApi(req, targetUrl, env) {
+  if (!authCheck(req, env)) return error('Unauthorized', 401);
 
   try {
     const headers = {
@@ -178,17 +177,17 @@ export default {
 
     if (path.startsWith('proxy/html/')) {
       const target = decodeURIComponent(path.replace('proxy/html/', ''));
-      return handleProxyHtml(req, target);
+      return handleProxyHtml(req, target, env);
     }
 
     if (path.startsWith('proxy/stream/')) {
       const target = decodeURIComponent(path.replace('proxy/stream/', ''));
-      return handleProxyStream(req, target);
+      return handleProxyStream(req, target, env);
     }
 
     if (path.startsWith('proxy/api/')) {
       const target = decodeURIComponent(path.replace('proxy/api/', ''));
-      return handleProxyApi(req, target);
+      return handleProxyApi(req, target, env);
     }
 
     if (path === 'health') {

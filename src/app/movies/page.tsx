@@ -1,21 +1,11 @@
 import { parseAnimeFilter } from "@/lib/sokuja/parser";
+import { getAnimeListHtml } from "@/lib/sokuja/client";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-// Since getGenreHtml('movie') returns 404, we'll fetch from the filter endpoint directly
-const API_KEY = 'e1d31716fcc84a54bb39da93c0bb4db911a9126459af4dd3922895e888f5ec78';
-const WORKER_URL = 'https://otakuproxy.azizkalimorgo.workers.dev';
-
-async function fetchMoviesHtml() {
-  const url = `${WORKER_URL}/proxy/html/${encodeURIComponent('/anime/?type=movie&order=update')}`;
-  const res = await fetch(url, { headers: { 'X-API-Key': API_KEY }, cache: 'no-store' });
-  if (!res.ok) return null;
-  return res.text();
-}
-
 export default async function Movies() {
   try {
-    const html = await fetchMoviesHtml();
+    const html = await getAnimeListHtml({ type: "movie", order: "update" });
     if (!html) return notFound();
     const result = parseAnimeFilter(html, { status: '', type: 'movie', order: 'update', page: 1 });
     
