@@ -1,8 +1,5 @@
 export const runtime = 'nodejs';
 
-import { getDetailHtml } from '@/lib/sokuja/client';
-import { parseAnimeDetail } from '@/lib/sokuja/parser';
-
 const ANILIST_API = 'https://graphql.anilist.co';
 
 async function fetchAniList(search: string) {
@@ -65,11 +62,11 @@ export async function GET(_: Request, { params }: { params: { slug: string } }) 
   
   try {
     // Import dynamically to avoid circular dependency
-    const { getDetailHtml } = await import('@/lib/sokuja/client');
+    const { getAnimeDetail } = await import('@/lib/sokuja/client');
     const { parseAnimeDetail } = await import('@/lib/sokuja/parser');
     
-    const html = await getDetailHtml(slug);
-    const sokujaData: any = parseAnimeDetail(html, slug);
+    const { html, slug: resolvedSlug } = await getAnimeDetail(slug);
+    const sokujaData: any = parseAnimeDetail(html, resolvedSlug);
     
     // Fetch AniList data
     const searchTitle = sokujaData.data?.title || slug;
