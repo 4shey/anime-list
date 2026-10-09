@@ -55,7 +55,7 @@ export default function NavActions() {
   return (
     <div ref={wrapRef} className="relative flex items-center gap-2">
       {/* Desktop: form pencarian */}
-      <form onSubmit={handleSubmit} className="relative hidden md:block w-64 lg:w-80">
+      <form onSubmit={handleSubmit} className="relative hidden md:block w-64 2xl:w-80">
         {searchIcon}
         <input
           type="text"
@@ -89,7 +89,7 @@ export default function NavActions() {
         onClick={() => setPanel((p) => (p === "menu" ? null : "menu"))}
         aria-label="Buka menu"
         aria-expanded={panel === "menu"}
-        className={`md:hidden p-2 rounded-lg border transition-colors ${
+        className={`xl:hidden p-2 rounded-lg border transition-colors ${
           panel === "menu"
             ? "border-[#00A2E9] bg-[#00A2E9]/10 text-[#00A2E9]"
             : "border-zinc-800 bg-zinc-900 text-zinc-300 hover:text-white hover:border-zinc-700"
@@ -129,7 +129,7 @@ export default function NavActions() {
 
       {/* Panel menu mobile */}
       {panel === "menu" && (
-        <div className="md:hidden absolute right-0 top-full mt-2 w-56 bg-zinc-950 border border-zinc-800 rounded-xl py-2 shadow-2xl">
+        <div className="xl:hidden absolute right-0 top-full mt-2 w-56 bg-zinc-950 border border-zinc-800 rounded-xl py-2 shadow-2xl">
           {MENU_LINKS.map((l) => (
             <Link
               key={l.href}

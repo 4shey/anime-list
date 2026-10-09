@@ -1,12 +1,19 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import NextTopLoader from "nextjs-toploader";
 import NavActions from "@/components/NavActions";
+import ViewportFix from "@/components/ViewportFix";
 import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  minimumScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "JMK48 - Sokuja Scraper",
@@ -26,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body className={`${inter.className} min-h-screen flex flex-col`}>
+        <ViewportFix />
         <NextTopLoader color="#00A2E9" showSpinner={false} />
         {/* Navbar */}
         <nav className="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
@@ -47,7 +55,7 @@ export default function RootLayout({
               </div>
 
               {/* Desktop Menu */}
-              <div className="hidden md:block">
+              <div className="hidden xl:block">
                 <div className="ml-10 flex items-baseline space-x-8">
                   <Link
                     href="/"
